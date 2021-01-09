@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbBankingModelStoreContainer" CdmEntityContainer="dbBankingEntities1">
+    <EntitySetMapping Name="tbladmins">
+      <EntityTypeMapping TypeName="dbBankingModel.tbladmin">
+        <MappingFragment StoreEntitySet="tbladmin">
+          <ScalarProperty Name="admin_id" ColumnName="admin_id" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBankingCustomers">
+      <EntityTypeMapping TypeName="dbBankingModel.tblBankingCustomer">
+        <MappingFragment StoreEntitySet="tblBankingCustomers">
+          <ScalarProperty Name="Reference_id" ColumnName="Reference_id" />
+          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="account_number" ColumnName="account_number" />
+          <ScalarProperty Name="account_OpenDate" ColumnName="account_OpenDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblBeneficiaries">
+      <EntityTypeMapping TypeName="dbBankingModel.tblBeneficiary">
+        <MappingFragment StoreEntitySet="tblBeneficiaries">
+          <ScalarProperty Name="beneficiary_id" ColumnName="beneficiary_id" />
+          <ScalarProperty Name="account_number" ColumnName="account_number" />
+          <ScalarProperty Name="beneficiary_account_number" ColumnName="beneficiary_account_number" />
+          <ScalarProperty Name="nickname" ColumnName="nickname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCustomers">
+      <EntityTypeMapping TypeName="dbBankingModel.tblCustomer">
+        <MappingFragment StoreEntitySet="tblCustomers">
+          <ScalarProperty Name="Reference_id" ColumnName="Reference_id" />
+          <ScalarProperty Name="First_name" ColumnName="First_name" />
+          <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+          <ScalarProperty Name="Father_name" ColumnName="Father_name" />
+          <ScalarProperty Name="mobile_number" ColumnName="mobile_number" />
+          <ScalarProperty Name="email_id" ColumnName="email_id" />
+          <ScalarProperty Name="account_type" ColumnName="account_type" />
+          <ScalarProperty Name="aadhar_number" ColumnName="aadhar_number" />
+          <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+          <ScalarProperty Name="age" ColumnName="age" />
+          <ScalarProperty Name="gender" ColumnName="gender" />
+          <ScalarProperty Name="Residential_address" ColumnName="Residential_address" />
+          <ScalarProperty Name="permanent_address" ColumnName="permanent_address" />
+          <ScalarProperty Name="occupation_Type" ColumnName="occupation_Type" />
+          <ScalarProperty Name="source_of_income" ColumnName="source_of_income" />
+          <ScalarProperty Name="gross_income" ColumnName="gross_income" />
+          <ScalarProperty Name="account_OpenDate" ColumnName="account_OpenDate" />
+          <ScalarProperty Name="approved_status" ColumnName="approved_status" />
+          <ScalarProperty Name="approved_by" ColumnName="approved_by" />
+          <ScalarProperty Name="approved_date" ColumnName="approved_date" />
+          <ScalarProperty Name="middle_name" ColumnName="middle_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTransactions">
+      <EntityTypeMapping TypeName="dbBankingModel.tblTransaction">
+        <MappingFragment StoreEntitySet="tblTransactions">
+          <ScalarProperty Name="transaction_id" ColumnName="transaction_id" />
+          <ScalarProperty Name="customer_id" ColumnName="customer_id" />
+          <ScalarProperty Name="transaction_type" ColumnName="transaction_type" />
+          <ScalarProperty Name="from_account" ColumnName="from_account" />
+          <ScalarProperty Name="to_account" ColumnName="to_account" />
+          <ScalarProperty Name="transaction_date" ColumnName="transaction_date" />
+          <ScalarProperty Name="remarks" ColumnName="remarks" />
+          <ScalarProperty Name="from_Account_balance" ColumnName="from_Account_balance" />
+          <ScalarProperty Name="to_Account_balance" ColumnName="to_Account_balance" />
+          <ScalarProperty Name="amount" ColumnName="amount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblNetBankings">
+      <EntityTypeMapping TypeName="dbBankingModel.tblNetBanking">
+        <MappingFragment StoreEntitySet="tblNetBanking">
+          <ScalarProperty Name="user_id" ColumnName="user_id" />
+          <ScalarProperty Name="account_number" ColumnName="account_number" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="transaction_password" ColumnName="transaction_password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

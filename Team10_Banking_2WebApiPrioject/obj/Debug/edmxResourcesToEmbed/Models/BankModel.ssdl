@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="dbBankModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tbladmin">
+    <Key>
+      <PropertyRef Name="admin_id" />
+    </Key>
+    <Property Name="admin_id" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblBalance">
+    <Key>
+      <PropertyRef Name="account_number" />
+    </Key>
+    <Property Name="customer_id" Type="int" />
+    <Property Name="account_number" Type="int" Nullable="false" />
+    <Property Name="account_type" Type="varchar" MaxLength="20" />
+    <Property Name="Name" Type="varchar" MaxLength="40" />
+    <Property Name="balance" Type="float" />
+  </EntityType>
+  <EntityType Name="tblBankingCustomers">
+    <Key>
+      <PropertyRef Name="customer_id" />
+    </Key>
+    <Property Name="Reference_id" Type="int" />
+    <Property Name="customer_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="account_number" Type="int" Nullable="false" />
+    <Property Name="account_OpenDate" Type="date" />
+  </EntityType>
+  <EntityType Name="tblBeneficiaries">
+    <Key>
+      <PropertyRef Name="beneficiary_id" />
+    </Key>
+    <Property Name="beneficiary_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_id" Type="int" />
+    <Property Name="account_number" Type="int" />
+    <Property Name="beneficiary_account_number" Type="int" />
+    <Property Name="nickname" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="tblCustomers">
+    <Key>
+      <PropertyRef Name="Reference_id" />
+    </Key>
+    <Property Name="Reference_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="First_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="middle_name" Type="varchar" MaxLength="30" />
+    <Property Name="Last_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Father_name" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="mobile_number" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="email_id" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="account_type" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="aadhar_number" Type="varchar" MaxLength="16" Nullable="false" />
+    <Property Name="date_of_birth" Type="date" Nullable="false" />
+    <Property Name="age" Type="int" Nullable="false" />
+    <Property Name="gender" Type="varchar" MaxLength="10" />
+    <Property Name="Residential_address" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="permanent_address" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="occupation_Type" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="source_of_income" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="gross_income" Type="float" Nullable="false" />
+    <Property Name="account_OpenDate" Type="date" />
+    <Property Name="approved_status" Type="varchar" MaxLength="10" />
+    <Property Name="approved_by" Type="varchar" MaxLength="20" />
+    <Property Name="approved_date" Type="date" />
+  </EntityType>
+  <EntityType Name="tblNetBanking">
+    <Key>
+      <PropertyRef Name="account_number" />
+    </Key>
+    <Property Name="user_id" Type="int" />
+    <Property Name="account_number" Type="int" Nullable="false" />
+    <Property Name="password" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="transaction_password" Type="varchar" MaxLength="15" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblTransactions">
+    <Key>
+      <PropertyRef Name="transaction_id" />
+    </Key>
+    <Property Name="transaction_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_id" Type="int" />
+    <Property Name="transaction_type" Type="varchar" MaxLength="10" />
+    <Property Name="from_account" Type="int" />
+    <Property Name="to_account" Type="int" />
+    <Property Name="from_Account_balance" Type="float" />
+    <Property Name="to_Account_balance" Type="float" />
+    <Property Name="amount" Type="float" />
+    <Property Name="transaction_date" Type="date" />
+    <Property Name="remarks" Type="text" />
+  </EntityType>
+  <Association Name="FK__tblBalanc__custo__70DDC3D8">
+    <End Role="tblBankingCustomers" Type="Self.tblBankingCustomers" Multiplicity="0..1" />
+    <End Role="tblBalance" Type="Self.tblBalance" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBankingCustomers">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="tblBalance">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblBankin__Refer__4222D4EF">
+    <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="0..1" />
+    <End Role="tblBankingCustomers" Type="Self.tblBankingCustomers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCustomers">
+        <PropertyRef Name="Reference_id" />
+      </Principal>
+      <Dependent Role="tblBankingCustomers">
+        <PropertyRef Name="Reference_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblBenefi__custo__4D94879B">
+    <End Role="tblBankingCustomers" Type="Self.tblBankingCustomers" Multiplicity="0..1" />
+    <End Role="tblBeneficiaries" Type="Self.tblBeneficiaries" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBankingCustomers">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="tblBeneficiaries">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblCustom__appro__3E52440B">
+    <End Role="tbladmin" Type="Self.tbladmin" Multiplicity="0..1" />
+    <End Role="tblCustomers" Type="Self.tblCustomers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbladmin">
+        <PropertyRef Name="admin_id" />
+      </Principal>
+      <Dependent Role="tblCustomers">
+        <PropertyRef Name="approved_by" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblNetBan__user___46E78A0C">
+    <End Role="tblBankingCustomers" Type="Self.tblBankingCustomers" Multiplicity="0..1" />
+    <End Role="tblNetBanking" Type="Self.tblNetBanking" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBankingCustomers">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="tblNetBanking">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblTransa__custo__4AB81AF0">
+    <End Role="tblBankingCustomers" Type="Self.tblBankingCustomers" Multiplicity="0..1" />
+    <End Role="tblTransactions" Type="Self.tblTransactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblBankingCustomers">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="tblTransactions">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="sp_DisplayTransaction" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="trans_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_SelectTransactionId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="acnt_no" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_transact" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="cust_id" Type="int" Mode="In" />
+    <Parameter Name="mode" Type="varchar" Mode="In" />
+    <Parameter Name="from_acnt" Type="int" Mode="In" />
+    <Parameter Name="to_acnt" Type="int" Mode="In" />
+    <Parameter Name="from_acnt_bal" Type="float" Mode="In" />
+    <Parameter Name="to_acnt_bal" Type="float" Mode="In" />
+    <Parameter Name="amount" Type="float" Mode="In" />
+    <Parameter Name="trans_date" Type="date" Mode="In" />
+    <Parameter Name="remarks" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="dbBankModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbladmin" EntityType="Self.tbladmin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBalance" EntityType="Self.tblBalance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBankingCustomers" EntityType="Self.tblBankingCustomers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblBeneficiaries" EntityType="Self.tblBeneficiaries" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCustomers" EntityType="Self.tblCustomers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblNetBanking" EntityType="Self.tblNetBanking" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTransactions" EntityType="Self.tblTransactions" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tblBalanc__custo__70DDC3D8" Association="Self.FK__tblBalanc__custo__70DDC3D8">
+      <End Role="tblBankingCustomers" EntitySet="tblBankingCustomers" />
+      <End Role="tblBalance" EntitySet="tblBalance" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblBankin__Refer__4222D4EF" Association="Self.FK__tblBankin__Refer__4222D4EF">
+      <End Role="tblCustomers" EntitySet="tblCustomers" />
+      <End Role="tblBankingCustomers" EntitySet="tblBankingCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblBenefi__custo__4D94879B" Association="Self.FK__tblBenefi__custo__4D94879B">
+      <End Role="tblBankingCustomers" EntitySet="tblBankingCustomers" />
+      <End Role="tblBeneficiaries" EntitySet="tblBeneficiaries" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblCustom__appro__3E52440B" Association="Self.FK__tblCustom__appro__3E52440B">
+      <End Role="tbladmin" EntitySet="tbladmin" />
+      <End Role="tblCustomers" EntitySet="tblCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblNetBan__user___46E78A0C" Association="Self.FK__tblNetBan__user___46E78A0C">
+      <End Role="tblBankingCustomers" EntitySet="tblBankingCustomers" />
+      <End Role="tblNetBanking" EntitySet="tblNetBanking" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblTransa__custo__4AB81AF0" Association="Self.FK__tblTransa__custo__4AB81AF0">
+      <End Role="tblBankingCustomers" EntitySet="tblBankingCustomers" />
+      <End Role="tblTransactions" EntitySet="tblTransactions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
